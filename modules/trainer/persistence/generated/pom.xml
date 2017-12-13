@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>helloworld-modules-trainer-persistence</artifactId>
+    <groupId>org.rapidpm.vaadin</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <packaging>pom</packaging>
+  <artifactId>helloworld-modules-trainer-persistence-generated</artifactId>
+
+
+  <dependencies>
+    <!-- Database driver for testing -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.speedment</groupId>
+      <artifactId>runtime</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <!--TDD-->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-ext</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!--<plugin>-->
+        <!--<groupId>io.fabric8</groupId>-->
+        <!--<artifactId>docker-maven-plugin</artifactId>-->
+        <!--<version>0.23.0</version>-->
+        <!--<configuration>-->
+          <!--<dockerHost>tcp://${docker.host.ip}:${docker.host.port}</dockerHost>-->
+          <!--<autoPull>on</autoPull>-->
+          <!--<images>-->
+            <!--<image>-->
+              <!--<alias>postgres</alias>-->
+              <!--<name>postgres:latest</name>-->
+              <!--<run>-->
+                <!--<hostname>postgres</hostname>-->
+                <!--<ports>-->
+                  <!--<port>5432:5432</port>-->
+                <!--</ports>-->
+                <!--<wait>-->
+                  <!--<tcp>-->
+                    <!--<ports>-->
+                      <!--<port>5432</port>-->
+                    <!--</ports>-->
+                  <!--</tcp>-->
+                <!--</wait>-->
+              <!--</run>-->
+            <!--</image>-->
+          <!--</images>-->
+        <!--</configuration>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<id>Docker :: start PostgreSQL</id>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<goals>-->
+              <!--<goal>start</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+          <!--<execution>-->
+            <!--<id>Docker :: stop PostgreSQL</id>-->
+            <!--<phase>post-integration-test</phase>-->
+            <!--<goals>-->
+              <!--<goal>stop</goal>-->
+              <!--<goal>remove</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+        <!--</executions>-->
+      <!--</plugin>-->
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <configuration>
+
+        </configuration>
+        <executions>
+          <execution>
+            <id>flyway :: migrate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.speedment</groupId>
+        <artifactId>speedment-maven-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <dbmsHost>${docker.host.ip}</dbmsHost>
+          <dbmsPort>5432</dbmsPort>
+          <dbmsUsername>${flyway.user}</dbmsUsername>
+          <dbmsPassword>${flyway.password}</dbmsPassword>
+          <!--<dbmsType>postgres</dbmsType>-->
+        </configuration>
+        <executions>
+          <execution>
+            <id>speedment :: clear</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>clear</goal>
+              <goal>reload</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>speedment :: generate</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

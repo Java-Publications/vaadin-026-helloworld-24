@@ -1,0 +1,35 @@
+{
+  "config" : {
+    "expanded" : true,
+    "appId" : "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+    "companyName" : "RapidPM",
+    "name" : "Vaadin",
+    "packageLocation" : "target/generated-sources/",
+    "id" : "vaadin",
+    "packageName" : "org.rapidpm.vaadin.trainer.persistence.speedment",
+    "dbmses" : [
+      {
+        "expanded" : true,
+        "port" : 5432,
+        "schemas" : [
+          {
+            "expanded" : true,
+            "tables" : [
+
+            ],
+            "name" : "public",
+            "id" : "public",
+            "enabled" : true
+          }
+        ],
+        "typeName" : "PostgreSQL",
+        "ipAddress" : "192.168.0.100",
+        "name" : "postgres",
+        "id" : "postgres",
+        "enabled" : true,
+        "username" : "postgres"
+      }
+    ],
+    "enabled" : true
+  }
+}
