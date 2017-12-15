@@ -2,6 +2,7 @@ package dev.org.rapidpm.vaadin;
 
 import com.vaadin.ui.*;
 import org.rapidpm.ddi.DI;
+import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.dependencies.core.logger.Logger;
 import org.rapidpm.frp.functions.CheckedFunction;
 import org.rapidpm.frp.model.Result;
@@ -21,7 +22,7 @@ import static org.rapidpm.frp.model.Result.ofNullable;
 /**
  *
  */
-public class DevComponent extends Composite {
+public class DevComponent extends Composite implements HasLogger {
 
   public static final String SELECTED_CLASS  = "selected.class";
   public static final int    REFRESH_RATE_MS = 1_000;
@@ -40,7 +41,7 @@ public class DevComponent extends Composite {
     return (clazz) -> ui
         .ifPresentOrElse(
             uiPresent -> switchFkt().andThen(uiPresent::access).apply(clazz),
-            uiMissing -> Logger.getLogger(DevComponent.class).info("UI not present..")
+            uiMissing -> logger().info("UI not present..")
         );
   }
 
@@ -55,7 +56,7 @@ public class DevComponent extends Composite {
                   testComponentPanel.setContent(success);
                   ui.get().push();
                 },
-                Logger.getLogger(clazz)::warning
+                failed -> logger().warning(failed)
             );
   }
 
@@ -72,7 +73,6 @@ public class DevComponent extends Composite {
         .ifPresent(refreshFkt()::accept));
 
     testComponentPanel.setSizeFull();
-
 
     mainLayout.addComponents(classComboBox,
                              autoRefreshComponent,
@@ -109,7 +109,7 @@ public class DevComponent extends Composite {
     timer.scheduleAtFixedRate(new TimerTask() {
       @Override
       public void run() {
-        Logger.getLogger(DevComponent.class).info("Timer Task is running..");
+        logger().info("Timer Task is running..");
         ui.ifPresentOrElse(
             yes -> yes.access(() -> {
               if (autoRefreshComponent.getValue()) {
@@ -118,7 +118,7 @@ public class DevComponent extends Composite {
                     .ifPresent(refreshFkt()::accept);
               }
             }),
-            no -> Logger.getLogger(DevComponent.class).info("UI not present..")
+            no -> logger().info("UI not present..")
         );
       }
     }, REFRESH_RATE_MS, REFRESH_RATE_MS);

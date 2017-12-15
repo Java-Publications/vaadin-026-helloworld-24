@@ -9,20 +9,20 @@ import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.rapidpm.vaadin.addons.testbench.junit5.extensions.unittest.VaadinUnitTest;
+import org.rapidpm.vaadin.addons.testbench.junit5.pageobject.AbstractVaadinPageObject;
+import org.rapidpm.vaadin.addons.testbench.junit5.pageobject.PageObject;
 import org.rapidpm.vaadin.trainer.modules.login.LoginComponent;
 import org.rapidpm.vaadin.trainer.modules.mainview.menu.MenuComponent;
 import com.vaadin.testbench.elements.ButtonElement;
 import com.vaadin.testbench.elements.PasswordFieldElement;
 import com.vaadin.testbench.elements.TextFieldElement;
-import junit.org.rapidpm.vaadin.junit5.extensions.pageobject.PageObject;
-import junit.org.rapidpm.vaadin.junit5.AbstractVaadinPageObject;
-import junit.org.rapidpm.vaadin.junit5.VaadinTest;
 
 /**
  *
  */
 
-@VaadinTest
+@VaadinUnitTest
 public class LoginUITest {
 
 

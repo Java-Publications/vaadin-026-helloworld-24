@@ -44,24 +44,27 @@ public class CalcComponent extends Composite {
   public static final String TF_VALUE_ONE_ID      = textfieldID().apply(CalcComponent.class, TF_VALUE_ONE);
   public static final String TF_VALUE_TWO_ID      = textfieldID().apply(CalcComponent.class, TF_VALUE_TWO);
   public static final String LABEL_OPERATOR_ID    = labelID().apply(CalcComponent.class, LABEL_OPERATOR);
+  public static final String CHART_RESULT_ID      = genericID().apply(CalcComponent.class, Chart.class, LABEL_OPERATOR);
 
-  public static final String CHART_RESULT_ID = genericID().apply(CalcComponent.class, Chart.class, LABEL_OPERATOR);
   public static final int COLUMNS = 7;
   public static final int ROWS    = 3;
-  private final GridLayout grid = new GridLayout(COLUMNS, ROWS);
-  private final TextField valueOne      = new TextField();
-  private final TextField valueTwo      = new TextField();
-  private final TextField humanResult   = new TextField();
-  private final TextField machineResult = new TextField();
-  private final Label resultLabel = new Label();
-  private final Label operator    = new Label(PLUS.getHtml(), HTML);
-  private final Button buttonNext      = new Button();
-  private final Button buttonCalculate = new Button();
-  private final Chart      chart  = new Chart(ChartType.BAR);
-  private final ListSeries series = new ListSeries();
+
+  private final GridLayout grid            = new GridLayout(COLUMNS, ROWS);
+  private final TextField  valueOne        = new TextField();
+  private final TextField  valueTwo        = new TextField();
+  private final TextField  humanResult     = new TextField();
+  private final TextField  machineResult   = new TextField();
+  private final Label      resultLabel     = new Label();
+//  private final Label      operator        = new Label(PLUS.getHtml(), HTML);
+  private final Label      operator        = new Label("+");
+  private final Button     buttonNext      = new Button();
+  private final Button     buttonCalculate = new Button();
+  private final Chart      chart           = new Chart(ChartType.BAR);
+  private final ListSeries series          = new ListSeries();
 
   //  @Inject private CalcBasicsService calcBasicsService;
   @Inject private PropertyService propertyService;
+
   private BasicArithmeticTask task;
   private Pair<Integer, Integer> results = Pair.next(0, 0);
 
@@ -176,7 +179,7 @@ public class CalcComponent extends Composite {
     xAxis.setCategories(
         property("calc.component.chart.result.good"),
         property("calc.component.chart.result.bad")
-                       );
+    );
     xAxis.setShowEmpty(false);
 //    xAxis.setShowEmpty(true);
 

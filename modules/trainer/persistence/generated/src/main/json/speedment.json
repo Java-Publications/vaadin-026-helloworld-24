@@ -15,7 +15,212 @@
           {
             "expanded" : true,
             "tables" : [
-
+              {
+                "primaryKeyColumns" : [
+                  {
+                    "name" : "id",
+                    "id" : "id",
+                    "ordinalPosition" : 1
+                  }
+                ],
+                "indexes" : [
+                  {
+                    "unique" : true,
+                    "name" : "comp_math_basic_pkey",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "name" : "id",
+                        "id" : "id",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "comp_math_basic_pkey"
+                  }
+                ],
+                "isView" : false,
+                "columns" : [
+                  {
+                    "databaseType" : "java.lang.Short",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "autoIncrement" : true,
+                    "name" : "id",
+                    "id" : "id",
+                    "ordinalPosition" : 1
+                  },
+                  {
+                    "databaseType" : "java.lang.Double",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "op_a",
+                    "id" : "op_a",
+                    "ordinalPosition" : 2
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "op",
+                    "id" : "op",
+                    "ordinalPosition" : 3
+                  },
+                  {
+                    "databaseType" : "java.lang.Double",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "op_b",
+                    "id" : "op_b",
+                    "ordinalPosition" : 4
+                  },
+                  {
+                    "databaseType" : "java.lang.Double",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "result_machine",
+                    "id" : "result_machine",
+                    "ordinalPosition" : 5
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : true,
+                    "name" : "result_human",
+                    "id" : "result_human",
+                    "ordinalPosition" : 6
+                  },
+                  {
+                    "databaseType" : "java.lang.Boolean",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "result_ok",
+                    "id" : "result_ok",
+                    "ordinalPosition" : 7
+                  },
+                  {
+                    "databaseType" : "java.sql.Timestamp",
+                    "nullable" : false,
+                    "name" : "created",
+                    "id" : "created",
+                    "ordinalPosition" : 8
+                  }
+                ],
+                "name" : "comp_math_basic",
+                "id" : "comp_math_basic"
+              },
+              {
+                "primaryKeyColumns" : [
+                  {
+                    "name" : "installed_rank",
+                    "id" : "installed_rank",
+                    "ordinalPosition" : 1
+                  }
+                ],
+                "indexes" : [
+                  {
+                    "unique" : true,
+                    "name" : "schema_version_pk",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "name" : "installed_rank",
+                        "id" : "installed_rank",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "schema_version_pk"
+                  },
+                  {
+                    "unique" : false,
+                    "name" : "schema_version_s_idx",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "name" : "success",
+                        "id" : "success",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "schema_version_s_idx"
+                  }
+                ],
+                "isView" : false,
+                "columns" : [
+                  {
+                    "databaseType" : "java.lang.Integer",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "installed_rank",
+                    "id" : "installed_rank",
+                    "ordinalPosition" : 1
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : true,
+                    "name" : "version",
+                    "id" : "version",
+                    "ordinalPosition" : 2
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "description",
+                    "id" : "description",
+                    "ordinalPosition" : 3
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "type",
+                    "id" : "type",
+                    "ordinalPosition" : 4
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "script",
+                    "id" : "script",
+                    "ordinalPosition" : 5
+                  },
+                  {
+                    "databaseType" : "java.lang.Integer",
+                    "nullable" : true,
+                    "name" : "checksum",
+                    "id" : "checksum",
+                    "ordinalPosition" : 6
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "installed_by",
+                    "id" : "installed_by",
+                    "ordinalPosition" : 7
+                  },
+                  {
+                    "databaseType" : "java.sql.Timestamp",
+                    "nullable" : false,
+                    "name" : "installed_on",
+                    "id" : "installed_on",
+                    "ordinalPosition" : 8
+                  },
+                  {
+                    "databaseType" : "java.lang.Integer",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "execution_time",
+                    "id" : "execution_time",
+                    "ordinalPosition" : 9
+                  },
+                  {
+                    "databaseType" : "java.lang.Boolean",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "name" : "success",
+                    "id" : "success",
+                    "ordinalPosition" : 10
+                  }
+                ],
+                "name" : "schema_version",
+                "id" : "schema_version"
+              }
             ],
             "name" : "public",
             "id" : "public",
@@ -23,7 +228,7 @@
           }
         ],
         "typeName" : "PostgreSQL",
-        "ipAddress" : "192.168.0.100",
+        "ipAddress" : "127.0.0.1",
         "name" : "postgres",
         "id" : "postgres",
         "enabled" : true,

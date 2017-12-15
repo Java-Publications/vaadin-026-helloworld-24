@@ -1,14 +1,13 @@
 package junit.org.rapidpm.vaadin.trainer.modules.mainview;
 
-import junit.org.rapidpm.vaadin.junit5.VaadinTest;
+
+import org.rapidpm.vaadin.addons.testbench.junit5.extensions.unittest.VaadinUnitTest;
 
 /**
  *
  */
-@VaadinTest
+@VaadinUnitTest
 public class LogoutTest {
-
-
 
 
 }

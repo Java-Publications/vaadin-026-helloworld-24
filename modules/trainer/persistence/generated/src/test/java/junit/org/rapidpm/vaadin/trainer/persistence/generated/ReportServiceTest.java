@@ -12,7 +12,7 @@ import org.rapidpm.frp.functions.CheckedBiFunction;
 import org.rapidpm.frp.functions.CheckedFunction;
 import org.rapidpm.frp.functions.CheckedSupplier;
 import org.rapidpm.frp.model.Result;
-import org.rapidpm.vaadin.trainer.persistence.speedment.Public_Application;
+import org.rapidpm.vaadin.trainer.persistence.speedment.VaadinApplication;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -31,7 +31,7 @@ import static org.rnorth.visibleassertions.VisibleAssertions.assertEquals;
 public class ReportServiceTest implements HasLogger {
 
   private Result<PostgreSQLContainer> postgreSQLContainer;
-  private Result<Public_Application>  speedmentAppl;
+  private Result<VaadinApplication>   speedmentAppl;
 
   @BeforeEach
   void setUp() {

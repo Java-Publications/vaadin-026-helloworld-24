@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.frp.functions.CheckedSupplier;
 import org.rapidpm.frp.model.Result;
-import org.rapidpm.vaadin.trainer.persistence.speedment.Public_Application;
-import org.rapidpm.vaadin.trainer.persistence.speedment.Public_ApplicationBuilder;
+import org.rapidpm.vaadin.trainer.persistence.speedment.VaadinApplication;
+import org.rapidpm.vaadin.trainer.persistence.speedment.VaadinApplicationBuilder;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasicImpl;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasicManager;
 import org.testcontainers.containers.GenericContainer;
@@ -30,10 +30,10 @@ import static org.rnorth.visibleassertions.VisibleAssertions.assertEquals;
 public class SpeedmentBaseTest implements HasLogger {
 
   private Result<PostgreSQLContainer> postgreSQLContainer;
-  private Result<Public_Application>  speedmentAppl;
+  private Result<VaadinApplication>   speedmentAppl;
 
-  public Function<JdbcDatabaseContainer, Public_Application> app() {
-    return (container) -> new Public_ApplicationBuilder()
+  public Function<JdbcDatabaseContainer, VaadinApplication> app() {
+    return (container) -> new VaadinApplicationBuilder()
         .withPassword(container.getPassword())
         .withUsername(container.getUsername())
         .withConnectionUrl(container.getJdbcUrl())
@@ -81,7 +81,7 @@ public class SpeedmentBaseTest implements HasLogger {
 
   @Test
   void test001() {
-    final Public_Application app = speedmentAppl.get();
+    final VaadinApplication app = speedmentAppl.get();
     assertEquals(
         "amount should be 5 ",
         5,
@@ -94,7 +94,7 @@ public class SpeedmentBaseTest implements HasLogger {
 
   @Test
   void test002() {
-    final Public_Application app = speedmentAppl.get();
+    final VaadinApplication app = speedmentAppl.get();
 
     assertEquals(
         "amount of result > 3",
@@ -110,7 +110,7 @@ public class SpeedmentBaseTest implements HasLogger {
 
   @Test
   void test003() {
-    final Public_Application app = speedmentAppl.get();
+    final VaadinApplication app = speedmentAppl.get();
 
     final CompMathBasicImpl newEntity = new CompMathBasicImpl();
     newEntity

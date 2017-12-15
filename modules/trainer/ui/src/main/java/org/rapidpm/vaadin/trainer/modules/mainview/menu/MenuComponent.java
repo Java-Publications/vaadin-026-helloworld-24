@@ -54,6 +54,13 @@ public class MenuComponent extends Composite {
   public static final String MENU_POINT_EXIT_MESSAGE = "menu.point.exit.message";
   public static final String MENU_BTN_WIDTH = "100%";
 
+  public static final String MENU_BUTTON_ID_CACULATE = buttonID().apply(MenuComponent.class, MENU_POINT_CALCULATE);
+  public static final String MENU_BUTTON_ID_WRITE = buttonID().apply(MenuComponent.class, MENU_POINT_WRITE);
+  public static final String MENU_BUTTON_ID_REPORT = buttonID().apply(MenuComponent.class, MENU_POINT_REPORT);
+  public static final String MENU_BUTTON_ID_DASHBOARD = buttonID().apply(MenuComponent.class, MENU_POINT_DASHBOARD);
+  public static final String MENU_BUTTON_ID_EXIT = buttonID().apply(MenuComponent.class, MENU_POINT_EXIT);
+
+
   private final Layout contentLayout;
 
   public MenuComponent(Layout contentLayout) {this.contentLayout = contentLayout;}

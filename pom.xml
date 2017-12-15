@@ -53,6 +53,7 @@
 
 
     <postgresql.version>42.1.4</postgresql.version>
+    <testcontainers.version>1.4.3</testcontainers.version>
   </properties>
 
   <repositories>
@@ -153,7 +154,20 @@
         <artifactId>rapidpm-microservice-modules-core</artifactId>
         <version>${rpm-microservice.version}</version>
       </dependency>
-      <!--DDI-->
+
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-functional-reactive</artifactId>
+        <version>0.5.0-SNAPSHOT</version>
+      </dependency>
+      <!--Testbench Add Ons-->
+
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-vaadin-addons-modules-testbench</artifactId>
+        <scope>test</scope>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
 
 
       <!--Persistence-->
@@ -196,7 +210,7 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>selenium</artifactId>
-        <version>1.4.3</version>
+        <version>${testcontainers.version}</version>
         <scope>test</scope>
         <exclusions>
           <exclusion>
@@ -208,7 +222,7 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>postgresql</artifactId>
-        <version>1.4.3</version>
+        <version>${testcontainers.version}</version>
         <scope>test</scope>
         <exclusions>
           <exclusion>
@@ -244,7 +258,18 @@
       <artifactId>rapidpm-dynamic-cdi-modules-core</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-dependencies-core-logger</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-functional-reactive</artifactId>
+    </dependency>
+
     <!--TDD-->
+
+
     <dependency>
       <groupId>org.rnorth.visible-assertions</groupId>
       <artifactId>visible-assertions</artifactId>
@@ -282,12 +307,6 @@
     <!--Logging-->
 
     <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>rapidpm-dependencies-core-logger</artifactId>
-      <version>3.5.3</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
@@ -303,11 +322,7 @@
       <version>${slf4j.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>rapidpm-functional-reactive</artifactId>
-      <version>0.1.0</version>
-    </dependency>
+
 
 
     <!--Apache Commons-->
