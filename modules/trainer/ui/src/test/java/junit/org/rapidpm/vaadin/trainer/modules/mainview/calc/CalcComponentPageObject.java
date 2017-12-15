@@ -3,16 +3,13 @@ package junit.org.rapidpm.vaadin.trainer.modules.mainview.calc;
 import com.vaadin.testbench.elements.ButtonElement;
 import com.vaadin.testbench.elements.LabelElement;
 import com.vaadin.testbench.elements.TextFieldElement;
-import junit.org.rapidpm.vaadin.trainer.login.LoginUITest;
-import junit.org.rapidpm.vaadin.trainer.modules.mainview.menu.MenuPageObject;
 import org.openqa.selenium.WebDriver;
 import org.rapidpm.frp.model.Result;
 import org.rapidpm.vaadin.addons.testbench.junit5.extensions.unittest.VaadinUnitTest;
 import org.rapidpm.vaadin.addons.testbench.junit5.pageobject.AbstractVaadinPageObject;
 import org.rapidpm.vaadin.trainer.modules.mainview.calc.CalcComponent;
 
-import java.util.function.Function;
-
+import static junit.org.rapidpm.vaadin.trainer.BasicNavigationFunctions.*;
 import static org.rapidpm.vaadin.addons.testbench.WebElementFunctions.floatOfTextField;
 import static org.rapidpm.vaadin.addons.testbench.WebElementFunctions.intOfTextField;
 import static org.rapidpm.vaadin.trainer.modules.mainview.calc.CalcComponent.*;
@@ -27,40 +24,9 @@ public class CalcComponentPageObject extends AbstractVaadinPageObject {
     super(webDriver);
   }
 
-  public <T extends AbstractVaadinPageObject> Function<T, T> restart() {
-    return (po) -> {
-//      po.restartApplication();
-      return po;
-    };
+  public void start(){
+    loginToMenue().apply(this).calculateButton().click();
   }
-
-  public <T extends AbstractVaadinPageObject> Function<T, T> load() {
-    return (po) -> {
-      po.loadPage();
-      return po;
-    };
-  }
-
-  public <T extends AbstractVaadinPageObject> Function<T, MenuPageObject> login() {
-    return (po) -> {
-      final LoginUITest.LoginUIPageObject login = new LoginUITest.LoginUIPageObject(po.getDriver());
-      login.login.get().setValue("sven");
-      login.password.get().setValue("sven");
-      login.buttonOK.get().click();
-      return new MenuPageObject(po.getDriver());
-    };
-  }
-
-
-  public void start() {
-    restart()
-        .andThen(load())
-        .andThen(login())
-        .apply(this)
-        .calculateButton()
-        .click();
-  }
-
 
   public ButtonElement buttonOK() {
     return btn().id(CalcComponent.BTN_CALC_ID);
