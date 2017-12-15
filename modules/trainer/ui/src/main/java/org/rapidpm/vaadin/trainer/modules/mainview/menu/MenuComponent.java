@@ -131,7 +131,7 @@ public class MenuComponent extends Composite {
     button.addStyleName(MENU_ITEM);
     button.setWidth(MENU_BTN_WIDTH);
 
-    button.setId(buttonID().apply(MainView.class , caption));
+    button.setId(buttonID().apply(MenuComponent.class , caption));
 
     return new Pair<>(mapToShiroRole(caption) , button);
 
