@@ -16,6 +16,23 @@
             "expanded" : true,
             "tables" : [
               {
+                "foreignKeys" : [
+                  {
+                    "foreignKeyColumns" : [
+                      {
+                        "foreignDatabaseName" : "postgres",
+                        "foreignSchemaName" : "public",
+                        "name" : "id_user",
+                        "foreignColumnName" : "id",
+                        "id" : "id_user",
+                        "foreignTableName" : "core_user",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "name" : "comp_math_basic_id_user_fkey",
+                    "id" : "comp_math_basic_id_user_fkey"
+                  }
+                ],
                 "primaryKeyColumns" : [
                   {
                     "name" : "id",
@@ -41,7 +58,7 @@
                 "isView" : false,
                 "columns" : [
                   {
-                    "databaseType" : "java.lang.Short",
+                    "databaseType" : "java.lang.Long",
                     "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "autoIncrement" : true,
@@ -101,10 +118,89 @@
                     "name" : "created",
                     "id" : "created",
                     "ordinalPosition" : 8
+                  },
+                  {
+                    "databaseType" : "java.lang.Long",
+                    "nullable" : true,
+                    "name" : "id_user",
+                    "id" : "id_user",
+                    "ordinalPosition" : 9
                   }
                 ],
                 "name" : "comp_math_basic",
                 "id" : "comp_math_basic"
+              },
+              {
+                "primaryKeyColumns" : [
+                  {
+                    "name" : "id",
+                    "id" : "id",
+                    "ordinalPosition" : 1
+                  }
+                ],
+                "indexes" : [
+                  {
+                    "unique" : true,
+                    "name" : "core_user_login_key",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "name" : "login",
+                        "id" : "login",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "core_user_login_key"
+                  },
+                  {
+                    "unique" : true,
+                    "name" : "core_user_pkey",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "name" : "id",
+                        "id" : "id",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "core_user_pkey"
+                  }
+                ],
+                "isView" : false,
+                "columns" : [
+                  {
+                    "databaseType" : "java.lang.Long",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
+                    "autoIncrement" : true,
+                    "name" : "id",
+                    "id" : "id",
+                    "ordinalPosition" : 1
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "login",
+                    "id" : "login",
+                    "ordinalPosition" : 2
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "forename",
+                    "id" : "forename",
+                    "ordinalPosition" : 3
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "nullable" : false,
+                    "name" : "familyname",
+                    "id" : "familyname",
+                    "ordinalPosition" : 4
+                  }
+                ],
+                "name" : "core_user",
+                "id" : "core_user"
               },
               {
                 "primaryKeyColumns" : [

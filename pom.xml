@@ -54,6 +54,7 @@
 
     <postgresql.version>42.1.4</postgresql.version>
     <testcontainers.version>1.4.3</testcontainers.version>
+    <rapidpm-vaadin-addons.version>0.0.1-SNAPSHOT</rapidpm-vaadin-addons.version>
   </properties>
 
   <repositories>
@@ -86,6 +87,12 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>helloworld-modules-trainer-persistence-generated</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>helloworld-modules-trainer-persistence-generated</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
@@ -166,9 +173,14 @@
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-vaadin-addons-modules-testbench</artifactId>
         <scope>test</scope>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${rapidpm-vaadin-addons.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-vaadin-addons-modules-junit5</artifactId>
+        <scope>test</scope>
+        <version>${rapidpm-vaadin-addons.version}</version>
+      </dependency>
 
       <!--Persistence-->
       <dependency>
