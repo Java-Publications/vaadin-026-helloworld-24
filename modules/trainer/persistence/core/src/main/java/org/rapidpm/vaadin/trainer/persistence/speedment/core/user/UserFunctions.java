@@ -3,6 +3,7 @@ package org.rapidpm.vaadin.trainer.persistence.speedment.core.user;
 import com.speedment.runtime.core.Speedment;
 import com.speedment.runtime.core.manager.Manager;
 import org.rapidpm.frp.model.Result;
+import org.rapidpm.vaadin.trainer.api.model.User;
 import org.rapidpm.vaadin.trainer.persistence.speedment.HasSpeedmentApp;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.core_user.CoreUser;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.core_user.CoreUserImpl;
@@ -47,7 +48,18 @@ public interface UserFunctions extends HasSpeedmentApp {
         .orElseGet(() -> failure("no user found for id : " + id));
   }
 
-  default Function<String, Stream<User>> filteredUserByLogin() {
+  default Function<String, Result<User>> userWithLogin() {
+    return (login) -> _coreUsers()
+        .apply(app())
+        .filter(CoreUser.LOGIN.equal(login))
+        .findFirst()
+        .map(cu -> success(mapCoreUser().apply(cu)))
+        .orElseGet(() -> failure("no user found for login : " + login));
+  }
+
+
+
+  default Function<String, Stream<User>> filteredUserStreamByLogin() {
     return (login) -> _coreUsers()
         .apply(app())
         .filter(LOGIN.equal(login))
@@ -59,6 +71,7 @@ public interface UserFunctions extends HasSpeedmentApp {
         .apply(app())
         .map(mapCoreUser());
   }
+
   default Function<Speedment, Stream<CoreUser>> _coreUsers() {
     return _coreUserManager().andThen(_coreUsersStream());
   }

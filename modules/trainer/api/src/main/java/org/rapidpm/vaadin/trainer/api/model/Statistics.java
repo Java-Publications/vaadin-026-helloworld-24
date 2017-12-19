@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.trainer.api.report;
+package org.rapidpm.vaadin.trainer.api.model;
 
 import org.rapidpm.frp.model.serial.Quad;
 

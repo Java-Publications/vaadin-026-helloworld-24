@@ -14,9 +14,24 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.rapidpm.vaadin</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>helloworld-modules-trainer-api</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>helloworld-modules-trainer-persistence-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>helloworld-modules-trainer-persistence-generated</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>helloworld-modules-microkernel</artifactId>
+    </dependency>
+
     <!--TDD-->
     <dependency>
       <groupId>org.testcontainers</groupId>

@@ -6,9 +6,9 @@ import junit.org.rapidpm.vaadin.trainer.persistence.generated.speedment.junit5.S
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.rapidpm.vaadin.trainer.api.model.CalcResult;
 import org.rapidpm.vaadin.trainer.persistence.speedment.CRUDFunctions;
 import org.rapidpm.vaadin.trainer.persistence.speedment.VaadinApplication;
-import org.rapidpm.vaadin.trainer.persistence.speedment.mainview.calc.CalcResult;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasic;
 
 import java.time.LocalDateTime;

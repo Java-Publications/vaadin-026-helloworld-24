@@ -5,9 +5,9 @@ import com.speedment.runtime.core.manager.Manager;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.frp.Transformations;
 import org.rapidpm.frp.model.Result;
-import org.rapidpm.vaadin.trainer.persistence.speedment.core.user.User;
+import org.rapidpm.vaadin.trainer.api.model.CalcResult;
+import org.rapidpm.vaadin.trainer.api.model.User;
 import org.rapidpm.vaadin.trainer.persistence.speedment.core.user.UserFunctions;
-import org.rapidpm.vaadin.trainer.persistence.speedment.mainview.calc.CalcResult;
 import org.rapidpm.vaadin.trainer.persistence.speedment.mainview.calc.CalcResultFunctions;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasic;
 import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasicImpl;
@@ -30,28 +30,20 @@ public interface CRUDFunctions extends
                                HasSpeedmentApp {
 
 
-  default Function<String, Stream<CompMathBasic>> mathBasicsForLogin() {
-    return (login) -> _mathBasicForLoginCurried()
-        .apply(app())
-        .apply(login);
+  default Function<String, Stream<CalcResult>> calResultsForLogin(){
+    return (login) -> _mathBasicsForLogin()
+        .apply(login)
+        .map(mapCompMathBasic());
   }
 
-
-  default BiFunction<Speedment, String, Stream<CompMathBasic>> _mathBasicsForLogin() {
-    return (app, login) -> _coreUsers()
-        .apply(app)
+  default Function<String, Stream<CompMathBasic>> _mathBasicsForLogin() {
+    return (login) -> _coreUsers()
+        .apply(app())
         .filter(LOGIN.equal(login))
         .flatMap(_mathBasicManager()
-                     .apply(app)
+                     .apply(app())
                      .finderBackwardsBy(CompMathBasic.ID_USER));
   }
-
-  default Function<Speedment, Function<String, Stream<CompMathBasic>>> _mathBasicForLoginCurried() {
-    return Transformations
-        .<Speedment, String, Stream<CompMathBasic>>curryBiFunction()
-        .apply(_mathBasicsForLogin());
-  }
-
 
   default Function<CompMathBasic, CalcResult> mapCompMathBasic() {
     return (input) -> {
@@ -76,7 +68,7 @@ public interface CRUDFunctions extends
     };
   }
 
-  default Function<CalcResult, CompMathBasic > mapCalcResult() {
+  default Function<CalcResult, CompMathBasic> mapCalcResult() {
     return (input) -> {
       final CompMathBasic result = new CompMathBasicImpl()
           .setCreated((input.getTimestamp() == null) ? null : Timestamp.valueOf(input.getTimestamp()))
@@ -86,9 +78,9 @@ public interface CRUDFunctions extends
           .setResultHuman(input.getResultHuman())
           .setResultMachine(input.getResultMachine())
           .setResultOk(input.getResultOK())
-          .setIdUser((input.getUser() == null) ? null : input.getId());
+          .setIdUser((input.getUser() == null) ? null : input.getUser().id());
 
-      if(input.getId() != null){
+      if (input.getId() != null) {
         result.setId(input.getId());
       }
 

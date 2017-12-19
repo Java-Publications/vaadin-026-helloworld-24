@@ -13,8 +13,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>api</module>
-    <module>backend</module>
     <module>persistence</module>
+    <module>backend</module>
     <module>ui</module>
   </modules>
 

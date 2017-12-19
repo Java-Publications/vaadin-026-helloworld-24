@@ -1,9 +1,6 @@
-package org.rapidpm.vaadin.trainer.persistence.speedment.mainview.calc;
-
-import org.rapidpm.vaadin.trainer.persistence.speedment.core.user.User;
+package org.rapidpm.vaadin.trainer.api.model;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**

@@ -3,15 +3,8 @@ package org.rapidpm.vaadin;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
+import com.vaadin.ui.*;
 import org.rapidpm.frp.functions.TriFunction;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
 
 /**
  *
@@ -23,6 +16,10 @@ public interface ComponentIDGenerator {
             + "-" + componentClass.getSimpleName()
             + "-" + label.replace(" ", "-"))
         .toLowerCase(Locale.US);
+  }
+
+  static BiFunction<Class, String, String> comboBoxID() {
+    return (uiClass, label) -> genericID().apply(uiClass, ComboBox.class, label);
   }
 
   static BiFunction<Class, String, String> gridID() {

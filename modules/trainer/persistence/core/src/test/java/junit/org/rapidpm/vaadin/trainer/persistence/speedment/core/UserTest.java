@@ -6,10 +6,10 @@ import junit.org.rapidpm.vaadin.trainer.persistence.generated.speedment.junit5.S
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.rapidpm.vaadin.trainer.api.model.CalcResult;
+import org.rapidpm.vaadin.trainer.api.model.User;
 import org.rapidpm.vaadin.trainer.persistence.speedment.CRUDFunctions;
 import org.rapidpm.vaadin.trainer.persistence.speedment.VaadinApplication;
-import org.rapidpm.vaadin.trainer.persistence.speedment.core.user.User;
-import org.rapidpm.vaadin.trainer.persistence.speedment.postgres.public_.comp_math_basic.CompMathBasic;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +34,8 @@ public class UserTest {
   @Test
   void test002(@SpeedmentApp VaadinApplication app) {
 
-    final List<CompMathBasic> svenMathBasicList = ((CRUDFunctions) () -> app)
-        .mathBasicsForLogin()
+    final List<CalcResult> svenMathBasicList = ((CRUDFunctions) () -> app)
+        .calResultsForLogin()
         .apply("sven")
         .collect(toList());
 
@@ -51,7 +51,7 @@ public class UserTest {
   @Test
   void test003(@SpeedmentApp VaadinApplication app) {
     final Optional<User> sven = ((CRUDFunctions) () -> app)
-        .filteredUserByLogin()
+        .filteredUserStreamByLogin()
         .apply("sven")
         .findFirst();
 
@@ -68,7 +68,7 @@ public class UserTest {
         .accept(newUser);
 
     final Optional<User> user = ((CRUDFunctions) () -> app)
-        .filteredUserByLogin()
+        .filteredUserStreamByLogin()
         .apply("XX")
         .findFirst();
 

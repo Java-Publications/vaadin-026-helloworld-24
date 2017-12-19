@@ -56,51 +56,7 @@
 
   <build>
     <plugins>
-      <!--<plugin>-->
-        <!--<groupId>io.fabric8</groupId>-->
-        <!--<artifactId>docker-maven-plugin</artifactId>-->
-        <!--<version>0.23.0</version>-->
-        <!--<configuration>-->
-          <!--<dockerHost>tcp://${docker.host.ip}:${docker.host.port}</dockerHost>-->
-          <!--<autoPull>on</autoPull>-->
-          <!--<images>-->
-            <!--<image>-->
-              <!--<alias>postgres</alias>-->
-              <!--<name>postgres:latest</name>-->
-              <!--<run>-->
-                <!--<hostname>postgres</hostname>-->
-                <!--<ports>-->
-                  <!--<port>5432:5432</port>-->
-                <!--</ports>-->
-                <!--<wait>-->
-                  <!--<tcp>-->
-                    <!--<ports>-->
-                      <!--<port>5432</port>-->
-                    <!--</ports>-->
-                  <!--</tcp>-->
-                <!--</wait>-->
-              <!--</run>-->
-            <!--</image>-->
-          <!--</images>-->
-        <!--</configuration>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<id>Docker :: start PostgreSQL</id>-->
-            <!--<phase>generate-sources</phase>-->
-            <!--<goals>-->
-              <!--<goal>start</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
-          <!--<execution>-->
-            <!--<id>Docker :: stop PostgreSQL</id>-->
-            <!--<phase>post-integration-test</phase>-->
-            <!--<goals>-->
-              <!--<goal>stop</goal>-->
-              <!--<goal>remove</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
+
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>

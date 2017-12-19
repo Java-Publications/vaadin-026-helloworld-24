@@ -10,6 +10,8 @@ import static org.rapidpm.vaadin.server.SessionAttributes.SESSION_ATTRIBUTE_USER
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.rapidpm.vaadin.server.api.SessionService;
+import org.rapidpm.vaadin.trainer.api.model.User;
 import org.rapidpm.vaadin.trainer.api.property.PropertyService;
 import org.rapidpm.microservice.security.login.LoginService;
 import org.rapidpm.vaadin.trainer.api.security.user.UserService;
@@ -44,9 +46,10 @@ public class LoginComponent extends Composite {
   public static final String ID_PANEL_MAIN = passwordID().apply(LoginComponent.class , PANEL_CAPTION_MAIN);
 
 
-  @Inject private LoginService loginService;
-  @Inject private UserService userService;
-  @Inject private PropertyService propertyService;
+  @Inject private LoginService         loginService;
+  @Inject private UserService          userService;
+  @Inject private PropertyService      propertyService;
+  @Inject private SessionService<User> sessionService;
 
   private final TextField login = new TextField();
   private final PasswordField password = new PasswordField();
@@ -85,9 +88,7 @@ public class LoginComponent extends Composite {
       final UI currentUI = UI.getCurrent();
       currentUI.setContent((check) ? activateDI(MainView.class) : this);
 
-      final VaadinSession vaadinSession = currentUI.getSession();
-      vaadinSession.setAttribute(SESSION_ATTRIBUTE_USER , (check) ? userService.loadUser(loginValue) : null);
-
+      sessionService.setActiveUser((check) ? userService.loadUser(loginValue) : null);
       if (! check)
         show(property("login.failed") ,
              property("login.failed.description") ,

@@ -4,16 +4,23 @@ import com.vaadin.addon.charts.Chart;
 import com.vaadin.addon.charts.model.*;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
+import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.frp.model.serial.Pair;
+import org.rapidpm.vaadin.server.api.SessionService;
+import org.rapidpm.vaadin.trainer.api.model.CalcResult;
+import org.rapidpm.vaadin.trainer.api.model.User;
 import org.rapidpm.vaadin.trainer.api.property.PropertyService;
+import org.rapidpm.vaadin.trainer.api.report.ReportService;
 import org.rapidpm.vaadin.trainer.modules.mainview.calc.basics.CalcBasicsService.BasicArithmeticTask;
 import org.rapidpm.vaadin.trainer.modules.mainview.calc.basics.CalcBasicsService.Operator;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import static com.vaadin.icons.VaadinIcons.*;
-import static com.vaadin.shared.ui.ContentMode.HTML;
+import java.time.LocalDateTime;
+
+import static com.vaadin.icons.VaadinIcons.CHECK_CIRCLE;
+import static com.vaadin.icons.VaadinIcons.CLOSE_CIRCLE;
 import static java.lang.String.valueOf;
 import static org.rapidpm.vaadin.ComponentIDGenerator.*;
 import static org.rapidpm.vaadin.trainer.modules.mainview.calc.basics.CalcBasicsService.nextRndNoDivTask;
@@ -22,7 +29,7 @@ import static org.rapidpm.vaadin.trainer.modules.mainview.calc.basics.CalcBasics
 /**
  *
  */
-public class CalcComponent extends Composite {
+public class CalcComponent extends Composite implements HasLogger {
 
   public static final String BTN_NEXT          = "calc.component.btn.next";
   public static final String BTN_OK            = "calc.component.btn.ok";
@@ -55,7 +62,7 @@ public class CalcComponent extends Composite {
   private final TextField  humanResult     = new TextField();
   private final TextField  machineResult   = new TextField();
   private final Label      resultLabel     = new Label();
-//  private final Label      operator        = new Label(PLUS.getHtml(), HTML);
+  //  private final Label      operator        = new Label(PLUS.getHtml(), HTML);
   private final Label      operator        = new Label("+");
   private final Button     buttonNext      = new Button();
   private final Button     buttonCalculate = new Button();
@@ -63,7 +70,9 @@ public class CalcComponent extends Composite {
   private final ListSeries series          = new ListSeries();
 
   //  @Inject private CalcBasicsService calcBasicsService;
-  @Inject private PropertyService propertyService;
+  @Inject private PropertyService      propertyService;
+  @Inject private ReportService        reportService;
+  @Inject private SessionService<User> sessionService;
 
   private BasicArithmeticTask task;
   private Pair<Integer, Integer> results = Pair.next(0, 0);
@@ -109,6 +118,26 @@ public class CalcComponent extends Composite {
       resultLabel.setCaptionAsHtml(true);
       buttonCalculate.setEnabled(false);
       buttonNext.setEnabled(true);
+
+      //TODO store the result
+
+      final CalcResult calcResult = new CalcResult();
+//      calcResult.setId();
+      calcResult.setOpA(Double.valueOf(a));
+      calcResult.setOperator(task.operator().sign());
+      calcResult.setOpB(Double.valueOf(b));
+      calcResult.setResultHuman(humanResult.getValue());
+      calcResult.setResultMachine(Double.valueOf(x));
+      calcResult.setResultOK(wasRight == 0);
+      calcResult.setTimestamp(LocalDateTime.now());
+      sessionService.actualUser()
+                    .ifPresentOrElse(
+                        calcResult::setUser,
+                        failed -> logger().warning("no active session user found !!")
+                    );
+
+      reportService.storeCalcResult(calcResult);
+
     });
 
     buttonNext.addClickListener((Button.ClickListener) event -> {
@@ -173,7 +202,6 @@ public class CalcComponent extends Composite {
 
     configuration.setTitle(property(CALC_COMPONENT_CHART_RESULT_TITLE_X));
     configuration.getLegend().setEnabled(false);
-//    configuration.getLegend().setEnabled(true);
 
     final XAxis xAxis = configuration.getxAxis();
     xAxis.setCategories(
@@ -181,13 +209,9 @@ public class CalcComponent extends Composite {
         property("calc.component.chart.result.bad")
     );
     xAxis.setShowEmpty(false);
-//    xAxis.setShowEmpty(true);
 
     final YAxis yAxis = configuration.getyAxis();
     yAxis.setTitle(property("calc.component.chart.result.yAxis"));
-//    yAxis.setTitle("a nice Title .. uups no PropertyService used");
-//    yAxis.setTitle(property("calc.component.chart.result.title.y"));
-//    yAxis.setTitle(property(CALC_COMPONENT_CHART_RESULT_TITLE_Y));
 
     series.setData(results.getT1(), results.getT2());
     configuration.setSeries(series);

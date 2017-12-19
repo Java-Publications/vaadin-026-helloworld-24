@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.trainer.persistence.speedment.core.user;
+package org.rapidpm.vaadin.trainer.api.model;
 
 import org.rapidpm.frp.model.serial.Quad;
 

@@ -61,11 +61,21 @@ public class PropertyServiceInMemory implements PropertyService {
     storage.put("calc.component.chart.result.bad", ":-(");
     storage.put("calc.component.chart.result.yAxis", "Amount");
 
+    storage.put("report.component.statistics.cb.userselect", "User select");
+    storage.put("report.component.statistics.cb.userselect.noselection", "No selected User");
+    storage.put("report.component.statistics.cb.userselect.noselection.description", "Please select a user from the ComboBox");
+
+    storage.put("report.component.statistics.grid.column.id", "UID");
+    storage.put("report.component.statistics.grid.column.username", "Username");
     storage.put("report.component.statistics.grid.column.forename", "Fore Name");
     storage.put("report.component.statistics.grid.column.familyname", "Family Name");
     storage.put("report.component.statistics.grid.column.lastlogin", "Last Login");
 
-
-
+    storage.put("report.component.statistics.grid.column.op.a", "Op A");
+    storage.put("report.component.statistics.grid.column.operator", "Operator");
+    storage.put("report.component.statistics.grid.column.op.b", "Op B");
+    storage.put("report.component.statistics.grid.column.result.human", "Result Human");
+    storage.put("report.component.statistics.grid.column.result.machine", "Result Machine");
+    storage.put("report.component.statistics.grid.column.result.ok", "Result OK");
     }
 }
